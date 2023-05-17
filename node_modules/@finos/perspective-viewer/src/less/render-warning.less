@@ -1,0 +1,81 @@
+/******************************************************************************
+ *
+ * Copyright (c) 2017, the Perspective Authors.
+ *
+ * This file is part of the Perspective library, distributed under the terms
+ * of the Apache License 2.0.  The full license can be found in the LICENSE
+ * file.
+ *
+ */
+
+// @amber400: #ffca28;
+
+:host {
+    .plugin_information {
+        color: var(--warning--color, inherit);
+        box-sizing: border-box;
+        display: flex;
+        position: absolute;
+        flex-direction: row;
+        justify-content: flex-start;
+        padding: 0.5rem;
+        z-index: 10000;
+        user-select: none;
+        left: 48px;
+        padding-left: 24px;
+        padding-right: 24px;
+        border-radius: 24px;
+        align-items: center;
+
+        &.plugin_information--warning {
+            background: var(--warning--background, #ffca28);
+        }
+
+        .plugin_information__text {
+            font-size: 12px;
+            margin-right: 0.25rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .plugin_information__icon {
+            height: 20px;
+        }
+
+        .plugin_information__icon:before {
+            content: var(--overflow-hint-icon--content);
+            height: 20px;
+            font-family: var(
+                --overflow_hint--font-family,
+                var(--button--font-family, inherit)
+            );
+            color: var(--overflow-hint-icon--color);
+            padding: var(--overflow-hint-icon--padding, 0 12px 0 6px);
+            font-size: 16px;
+        }
+
+        .plugin_information__action {
+            font-size: 12px;
+            text-decoration: underline;
+            cursor: pointer;
+            margin-right: 0.25rem;
+        }
+
+        .plugin_information__actions {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            justify-content: flex-start;
+        }
+
+        .plugin_information--overflow-hint-percent {
+            font-weight: 700;
+        }
+
+        .plugin_information--overflow-hint {
+            white-space: nowrap;
+        }
+    }
+}

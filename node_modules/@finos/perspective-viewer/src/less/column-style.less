@@ -1,0 +1,192 @@
+/******************************************************************************
+ *
+ * Copyright (c) 2017, the Perspective Authors.
+ *
+ * This file is part of the Perspective library, distributed under the terms of
+ * the Apache License 2.0.  The full license can be found in the LICENSE file.
+ *
+ */
+
+@mixin icon {
+    background-repeat: no-repeat;
+    background-color: var(--icon--color);
+    content: "";
+    display: inline-block;
+    -webkit-mask-size: cover;
+    mask-size: cover;
+}
+
+:host {
+    position: fixed;
+    z-index: 10000;
+    padding: 12px;
+    outline: none;
+    background-color: #ffffff;
+    font-size: 12px;
+    border: inherit;
+    user-select: none;
+
+    select {
+        height: auto;
+        padding-bottom: 2px;
+        border-bottom: 1px solid var(--input--border-color, #ccc);
+    }
+
+    #column-style-container {
+        margin-bottom: 4px;
+    }
+
+    label {
+        font-size: 8px;
+        width: 100%;
+    }
+
+    input[type="checkbox"] {
+        float: left;
+    }
+
+    input.parameter {
+        max-width: 80px;
+        background: none;
+        color: inherit;
+        border: 0px solid transparent;
+        outline: none;
+    }
+
+    input.parameter[type="number"] {
+        text-align: right;
+        border-bottom-width: 1px;
+        border-color: var(
+            --input--border-color,
+            var(--inactive--color, inherit)
+        );
+    }
+
+    input[type=number]:-webkit-inner-spin-button,
+    input[type=number]:-webkit-outer-spin-button {
+        opacity: 1;
+        background: transparent;
+        background-color: transparent;
+    }
+
+    .column-style-label {
+        display: flex;
+        padding: 4px 0px;
+    }
+
+    .indent {
+        margin-left: 24px;
+    }
+
+    input[type="checkbox"],
+    & > div > div > span:first-child {
+        width: 24px;
+        margin: 0;
+    }
+
+    input[type="checkbox"] {
+        appearance: none;
+
+        &:checked:after {
+            -webkit-mask-image: var(--column-checkbox-on--mask-image);
+            mask-image: var(--column-checkbox-on--mask-image);
+        }
+
+        &[disabled]:after {
+            opacity: 0.2s;
+        }
+
+        &:after {
+            @include icon;
+            height: 13px;
+            width: 13px;
+            -webkit-mask-image: var(--column-checkbox-off--mask-image);
+            mask-image: var(--column-checkbox-off--mask-image);
+        }
+
+        &:hover:after {
+            -webkit-mask-image: var(--column-checkbox-hover--mask-image);
+            mask-image: var(--column-checkbox-hover--mask-image);
+        }
+    }
+
+    input[type="radio"] {
+        appearance: none;
+
+        &:checked:after {
+            -webkit-mask-image: var(--column-radio-on--mask-image);
+            mask-image: var(--column-radio-on--mask-image);
+        }
+
+        &:after {
+            @include icon;
+            width: 10px;
+            height: 10px;
+            -webkit-mask-image: var(--column-radio-off--mask-image);
+            mask-image: var(--column-radio-off--mask-image);
+        }
+
+        &:hover:after {
+            -webkit-mask-image: var(--column-radio-hover--mask-image);
+            mask-image: var(--column-radio-hover--mask-image);
+        }
+    }
+
+    div.section {
+        margin-right: 6px;
+        margin-bottom: 8px;
+        flex: 1 1 100%;
+    }
+
+    div.inner_section {
+        margin-top: 4px;
+        width: 0px;
+        margin-bottom: 8px;
+        flex: 1 1 100%;
+    }
+
+    div.row {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    input[type="color"] {
+        width: 36px;
+        height: 36px;
+        cursor: pointer;
+        padding: 0;
+        margin-right: 4px;
+
+        &:before {
+            position: absolute;
+            font-family: var(--button--font-family, inherit);
+            margin-top: 11px;
+            margin-left: 12px;
+            font-size: 12px;
+            content: var(--column-style-pos-color--content, "+");
+            color: white;
+        }
+
+        &#neg-color-param:before {
+            content: var(--column-style-neg-color--content, "-");
+        }
+    }
+
+    .operator {
+        font-family: "Roboto Mono", monospace;
+        white-space: pre;
+    }
+
+    input[disabled]:after {
+        opacity: 0.5;
+    }
+
+    input.parameter[disabled] {
+        opacity: 0.5;
+    }
+
+    input[type="checkbox"]:not(:disabled) {
+        cursor: pointer;
+    }
+}

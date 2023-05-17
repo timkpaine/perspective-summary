@@ -1,0 +1,54 @@
+/******************************************************************************
+ *
+ * Copyright (c) 2017, the Perspective Authors.
+ *
+ * This file is part of the Perspective library, distributed under the terms of
+ * the Apache License 2.0.  The full license can be found in the LICENSE file.
+ *
+ */
+
+:host {
+    .dropdown-width-container {
+        position: relative;
+        flex: 1 1 auto;
+        height: 100%;
+
+        &:after {
+            content: attr(data-value) " ";
+            visibility: hidden;
+            white-space: nowrap;
+            padding-right: 17px;
+        }
+
+        select {
+            position: absolute;
+            width: 100%;
+            cursor: pointer;
+        }
+    }
+
+
+    select {
+        border-radius: 0;
+        border-width: 0px;
+        outline: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+        appearance: none;
+        color: inherit;
+        padding: 0px 12px 0px 0px;
+        font-size: 12px;
+        font-family: inherit;
+        background-color: var(--select--background-color, white);
+        background-image: url("../../svg/dropdown-selector.svg");
+        background-position: right 2px center;
+        background-repeat: no-repeat;
+        // background: var(--select--background,
+        //         url(../../svg/dropdown-selector.svg) no-repeat right 2px center);
+
+        option {
+            background: var(--select--background-color, #ffffff);
+        }
+    }
+}

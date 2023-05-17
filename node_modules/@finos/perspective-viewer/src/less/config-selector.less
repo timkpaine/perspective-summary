@@ -1,0 +1,365 @@
+/******************************************************************************
+ *
+ * Copyright (c) 2017, the Perspective Authors.
+ *
+ * This file is part of the Perspective library, distributed under the terms of
+ * the Apache License 2.0.  The full license can be found in the LICENSE file.
+ *
+ */
+
+@mixin icon {
+    background-repeat: no-repeat;
+    background-color: var(--icon--color);
+    content: "";
+    display: inline-block;
+    -webkit-mask-size: cover;
+    mask-size: cover;
+}
+
+:host {
+    #top_panel.dragdrop-highlight {
+        .psp-text-field {
+            border-bottom-color: var(--icon--color) !important;
+        }
+
+        .pivot-column-border {
+            border-color: var(--icon--color) !important;
+        }
+    }
+
+    #top_panel {
+        display: flex;
+        flex-direction: column;
+        justify-content: stretch;
+        padding: var(--top-panel--padding, 5px 0px 10px 0px);
+        max-width: 1000px;
+        z-index: 1;
+
+        .row_close {
+            margin: 0 6.5px 4px 6.5px;
+            cursor: pointer;
+            height: 14px;
+        }
+
+        .row_close:before {
+            height: 14px;
+            width: 14px;
+            background-repeat: no-repeat;
+            background-color: var(--icon--color);
+            content: "";
+            -webkit-mask-size: cover;
+            mask-size: cover;
+            display: inline-block;
+            -webkit-mask-image: var(--column-checkbox-on--mask-image);
+            mask-image: var(--column-checkbox-on--mask-image);
+        }
+
+        .row_close:hover:before {
+            -webkit-mask-image: var(--column-checkbox-hover--mask-image);
+            mask-image: var(--column-checkbox-hover--mask-image);
+        }
+
+        .pivot-column {
+            display: inline-flex;
+            align-items: center;
+            min-height: 28px;
+            position: relative;
+
+            .pivot-column-border {
+                flex: 1 1 auto;
+                overflow: hidden;
+                background-color: var(--plugin--background);
+                border: 1px solid var(--inactive--color, #ABABAB);
+                border-radius: 2px;
+                display: flex;
+                align-items: center;
+                position: relative;
+                padding-right: 8px;
+
+                .column_name {
+                    display: block;
+                }
+
+                .input-sizer {
+                    flex: 1 100000 auto;
+                }
+            }
+
+            &:hover .pivot-column-border {
+                border-color: var(--icon--color);
+            }
+
+            .pivot-column-draggable {
+                position: relative;
+                width: calc(100% - 27px);
+                min-height: 28px;
+                padding-bottom: 4px;
+                display: flex;
+                align-items: stretch;
+                cursor: move;
+            }
+
+            &:not(.column-empty) .pivot-column-border:before {
+                flex: 0 0 auto;
+                height: 12px;
+                width: 5px;
+                -webkit-mask-image: var(--column-drag-handle--mask-image);
+                mask-image: var(--column-drag-handle--mask-image);
+                margin: 0px 0 0 6px;
+                background-repeat: no-repeat;
+                background-color: var(--icon--color);
+                content: "";
+                display: inline-block;
+                -webkit-mask-size: cover;
+                mask-size: cover;
+            }
+
+            span {
+                white-space: nowrap;
+            }
+
+            span:first-child {
+                text-overflow: ellipsis;
+                // max-width: 250px;
+                overflow: hidden;
+            }
+
+            // Column is being dragged-over, e.g. this is the drop indicator.
+            & .config-drop {
+                background-color: #8b868045;
+                margin-right: 7px;
+                margin-bottom: 4px;
+                border: 1px solid var(--icon--color);
+                border-radius: 2px;
+                overflow: visible;
+                flex: 1 1 auto;
+                align-self: stretch;
+                position: relative;
+                &:before {
+                    content: " ";
+                    position: absolute;
+                    z-index: -1;
+                    top: 5px;
+                    left: 5px;
+                    right: 5px;
+                    bottom: 5px;
+                    border-radius: 2px;
+                    background-color: var(--icon--color);
+                    opacity: 0.3;
+                }
+
+                & > * {
+                    color: transparent;
+                }
+            }
+        }
+
+        label.pivot-selector-label {
+            pointer-events: none;
+        }
+
+        #group_by label.pivot-selector-label:before {
+            content: var(--group_by--content, "Group By");
+        }
+
+        #split_by label.pivot-selector-label:before {
+            content: var(--split_by--content, "Split By");
+        }
+
+        #sort label.pivot-selector-label:before {
+            content: "Order By";
+        }
+
+        // #filter {
+        //     min-width: 300px;
+        // }
+
+        #filter label.pivot-selector-label:before {
+            content: "Where";
+        }
+
+        .highlight-drop {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .rrow {
+            display: flex;
+            min-height: 24px;
+            align-items: center;
+            list-style: none;
+            padding: 24px 0px 12px 0px;
+
+            span[draggable] {
+                cursor: move;
+            }
+        }
+
+        .rrow > div {
+            display: flex;
+            min-height: 24px;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .rrow > * {
+            width: 100%;
+            padding: 0;
+            margin: 0px 0px -12px 0px;
+        }
+
+        .psp-text-field ul {
+            min-height: 20px;
+        }
+
+        .psp-text-field {
+            position: relative;
+            border-width: 0;
+            border-style: solid;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            min-height: 24px;
+            background-size: 100% 200%;
+        }
+
+        .psp-text-field>.psp-text-field__input {
+            flex-direction: column;
+            justify-content: stretch;
+            border: 0px;
+            line-height: 20px;
+            vertical-align: bottom;
+            padding-bottom: 0px;
+            display: none;
+            margin: 0;
+            padding: 0 0 0 0;
+            font-size: 12px;
+            min-height: 26px;
+            // margin-bottom: -1px;
+
+            // // Comma separators
+            // &> :not(.config-drop):after {
+            //     width: 0px;
+            //     content: ",";
+            // }
+
+            // &> :last-child:after {
+            //     display: none;
+            //     content: "" !important;
+            // }
+        }
+
+        .psp-text-field__input + label {
+            width: 0px;
+            height: 20px;
+            line-height: 17px;
+            box-sizing: border-box;
+            // color: var(--inactive--color);
+            white-space: nowrap;
+            padding: var(--column-drop-container--padding, 0px);
+            font-size: 12px;
+            display: inline-block;
+        }
+
+        .psp-text-field__input {
+            display: flex !important;
+        }
+
+        .psp-text-field__input+label {
+            position: absolute;
+            top: 0px;
+            margin: var(--column-drop-label--margin, -16px 0px 0px 0px);
+            font-size: 9px; //var(--column-drop-label--font-size, 10px);
+            display: var(--column-drop-label--display, none);
+        }
+
+        #transpose_button {
+            cursor: pointer;
+            flex-grow: 0;
+            font-family: inherit;
+            font-size: 9px;
+            user-select: none;
+            padding: 0;
+            align-self: center;
+            margin-bottom: -23px;
+            margin-top: 11.5px;
+            align-self: flex-end;
+            z-index: 1;
+            min-height: 0px;
+            margin-right: 30px;
+
+            &:hover:before {
+                color: var(--icon--color, inherit);
+            }
+
+            &:before {
+                font-family: var(--button--font-family, inherit);
+                color: var(--inactive--color, #666);
+                content: var(--transpose-button--content, "\21C4");
+            }
+        }
+    }
+
+    .sort-icon {
+        display: inline-flex;
+        margin-left: auto;
+        // margin-right: 8px;
+        cursor: pointer;
+        font-family: var(--button--font-family, inherit);
+
+        &:hover {
+            opacity: 1;
+            color: var(--active--color, inherit);
+        }
+
+        &:before {
+            @include icon;
+            width: 16px;
+            height: 16px;
+        }
+
+        &.desc:before {
+            -webkit-mask-image: var(--sort-desc-icon--mask-image);
+            mask-image: var(--sort-desc-icon--mask-image);
+        }
+
+        &.asc:before {
+            -webkit-mask-image: var(--sort-asc-icon--mask-image);
+            mask-image: var(--sort-asc-icon--mask-image);
+        }
+
+        &.none:before {
+            -webkit-mask-image: var(--sort-none-icon--mask-image);
+            mask-image: var(--sort-none-icon--mask-image);
+        }
+
+        &.asc.abs:before {
+            -webkit-mask-image: var(--sort-abs-asc-icon--mask-image);
+            mask-image: var(--sort-abs-asc-icon--mask-image);
+        }
+
+        &.desc.abs:before {
+            -webkit-mask-image: var(--sort-abs-desc-icon--mask-image);
+            mask-image: var(--sort-abs-desc-icon--mask-image);
+        }
+
+        &.col.asc:before {
+            -webkit-mask-image: var(--sort-col-asc-icon--mask-image);
+            mask-image: var(--sort-col-asc-icon--mask-image);
+        }
+
+        &.col.desc:before {
+            -webkit-mask-image: var(--sort-col-desc-icon--mask-image);
+            mask-image: var(--sort-col-desc-icon--mask-image);
+        }
+
+        &.col.asc.abs:before {
+            -webkit-mask-image: var(--sort-abs-col-asc-icon--mask-image);
+            mask-image: var(--sort-abs-col-asc-icon--mask-image);
+        }
+
+        &.col.desc.abs:before {
+            -webkit-mask-image: var(--sort-abs-col-desc-icon--mask-image);
+            mask-image: var(--sort-abs-col-desc-icon--mask-image);
+        }
+    }
+}
