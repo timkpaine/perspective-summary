@@ -45,8 +45,8 @@ document
     async (viewer, key) =>
       await viewer.restore({
         plugin_config: {
-          align_header: ["top", "bottom", "top", "bottom", "left", "right"][
-            Number.parseInt(key)
+          align_header: ["top", "bottom", "left", "right"][
+            Number.parseInt(key) % 4
           ],
         },
       })

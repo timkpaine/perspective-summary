@@ -6,10 +6,7 @@ import dayjs from "dayjs";
 
 const _ALIGN_OPTIONS = ["horizontal", "vertical"];
 const _ALIGN_DEFAULT = "horizontal";
-const _ALIGN_HEADER_OPTIONS = {
-  horizontal: ["top", "bottom"],
-  vertical: ["top", "bottom", "left", "right"],
-};
+const _ALIGN_HEADER_OPTIONS = ["top", "bottom", "left", "right"];
 const _ALIGN_HEADER_DEFAULTS = {
   default: {
     horizontal: "top",
@@ -20,7 +17,7 @@ const _ALIGN_HEADER_DEFAULTS = {
     vertical: "top",
   },
   modern: {
-    horizontal: "bottom",
+    horizontal: "right",
     vertical: "right",
   },
 };
@@ -168,8 +165,6 @@ export class PerspectiveViewerSummaryPluginElement extends HTMLElement {
       restore.theme !== undefined &&
       restore.theme !== this._config.plugin_config.theme;
 
-    console.log(theme_change, JSON.stringify(restore));
-
     // set theme
     this._config.plugin_config.theme =
       restore.theme || this._config.plugin_config.theme;
@@ -194,9 +189,7 @@ export class PerspectiveViewerSummaryPluginElement extends HTMLElement {
 
     // set header alignment to default if invalid
     if (
-      _ALIGN_HEADER_OPTIONS[this._config.plugin_config.align].indexOf(
-        this._config.plugin_config.align_header
-      ) < 0
+      _ALIGN_HEADER_OPTIONS.indexOf(this._config.plugin_config.align_header) < 0
     ) {
       this._config.plugin_config.align_header =
         _ALIGN_HEADER_DEFAULTS[this._config.plugin_config.theme][
